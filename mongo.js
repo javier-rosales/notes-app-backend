@@ -1,14 +1,7 @@
+require('dotenv').config()
 const mongoose = require('mongoose')
 
-if (process.argv.length < 3) {
-  console.log('give password as argument')
-  process.exit(1)
-}
-
-const password = process.argv[2]
-
-const url =
-  `mongodb+srv://cyjavdev:${password}@cluster0.beaap.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
+const url = process.env.TEST_MONGODB_URI
 
 mongoose.set('strictQuery', false)
 
@@ -21,7 +14,6 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 
-/*
 // Generate new note
 const note = new Note({
   content: 'HTML is easy',
@@ -29,11 +21,11 @@ const note = new Note({
 })
 
 note.save().then(() => {
-  console.log('note saved!')
+  console.log('Note saved!')
   mongoose.connection.close()
 })
-*/
 
+/*
 // Fetch objects from database
 Note.find({}).then(result => {
   result.forEach(note => {
@@ -42,3 +34,4 @@ Note.find({}).then(result => {
 
   mongoose.connection.close()
 })
+*/
